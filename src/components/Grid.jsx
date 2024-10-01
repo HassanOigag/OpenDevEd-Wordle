@@ -1,6 +1,15 @@
-import React from 'react'
-
+import React from "react";
+import { useState } from "react";
 function Grid() {
+  const [grid, setGrid] = useState([
+    ["", "", "", "", ""],
+    ["", "", "", "", ""],
+    ["", "", "", "", ""],
+    ["", "", "", "", ""],
+    ["", "", "", "", ""],
+  ]);
+  const [pos, setPos] = useState({ row: 0, col: 0 });
+
   return (
     <div className="grid">
       <div className="row">
@@ -49,4 +58,4 @@ function Grid() {
   );
 }
 
-export default Grid
+export default Grid;
