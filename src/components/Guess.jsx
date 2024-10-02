@@ -1,14 +1,14 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { GameContext } from "../gameContext";
 
 function isValidLetter(letter) {
   const letters = "abcdefghijklmnopqrstuvwxyz";
   return letters.includes(letter);
 }
 
-function Guess() {
+function Guess(props) {
   const [guess, setGuess] = useState(["", "", "", "", ""]);
-  const [guessedWord, setGuessedWord] = useState("");
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
@@ -22,9 +22,11 @@ function Guess() {
         setIndex(index - 1);
       }
       if (e.key === "Enter" && index === 5) {
-        setGuessedWord(guess.join(""));
+        props.setGuess(guess);
+        props.setRow(prev => prev + 1);
         setGuess(["", "", "", "", ""]);
         setIndex(0);
+        props.setCheck(true);
       }
       if (!isValidLetter(e.key)) return;
       if (index > 4) return;
