@@ -11,50 +11,53 @@ function Grid() {
   const [pos, setPos] = useState({ row: 0, col: 0 });
 
   return (
-    <div className="grid">
-      <div className="row">
-        <div className="col"></div>
-        <div className="col"></div>
-        <div className="col"></div>
-        <div className="col"></div>
-        <div className="col"></div>
+    <>
+      <div className="grid">
+        <div className="row">
+          <div className="col"></div>
+          <div className="col"></div>
+          <div className="col"></div>
+          <div className="col"></div>
+          <div className="col"></div>
+        </div>
+        <div className="row">
+          <div className="col"></div>
+          <div className="col"></div>
+          <div className="col"></div>
+          <div className="col"></div>
+          <div className="col"></div>
+        </div>
+        <div className="row">
+          <div className="col"></div>
+          <div className="col"></div>
+          <div className="col"></div>
+          <div className="col"></div>
+          <div className="col"></div>
+        </div>
+        <div className="row">
+          <div className="col"></div>
+          <div className="col"></div>
+          <div className="col"></div>
+          <div className="col"></div>
+          <div className="col"></div>
+        </div>
+        <div className="row">
+          <div className="col"></div>
+          <div className="col"></div>
+          <div className="col"></div>
+          <div className="col"></div>
+          <div className="col"></div>
+        </div>
+        <div className="row">
+          <div className="col"></div>
+          <div className="col"></div>
+          <div className="col"></div>
+          <div className="col"></div>
+          <div className="col"></div>
+        </div>
       </div>
-      <div className="row">
-        <div className="col"></div>
-        <div className="col"></div>
-        <div className="col"></div>
-        <div className="col"></div>
-        <div className="col"></div>
-      </div>
-      <div className="row">
-        <div className="col"></div>
-        <div className="col"></div>
-        <div className="col"></div>
-        <div className="col"></div>
-        <div className="col"></div>
-      </div>
-      <div className="row">
-        <div className="col"></div>
-        <div className="col"></div>
-        <div className="col"></div>
-        <div className="col"></div>
-        <div className="col"></div>
-      </div>
-      <div className="row">
-        <div className="col"></div>
-        <div className="col"></div>
-        <div className="col"></div>
-        <div className="col"></div>
-        <div className="col"></div>
-      </div>
-      <div className="row">
-        <div className="col"></div>
-        <div className="col"></div>
-        <div className="col"></div>
-        <div className="col"></div>
-        <div className="col"></div>
-      </div>
-    </div>
+
+    </>
   );
 }
 
