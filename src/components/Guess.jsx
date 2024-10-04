@@ -11,18 +11,36 @@ function isValidLetter(letter) {
 }
 
 function Guess() {
-  const { row, setRow, setGrid } = useContext(GameContext);
+  const { row, setRow, setGrid, setShowToast, setToastText } =
+    useContext(GameContext);
   const [index, setIndex] = useState(0);
   const [guess, setGuess] = useState(["", "", "", "", ""]);
   const [shake, setShake] = useState(false);
 
-  const checkGuess = (guess) => {
-    if (!words.includes(guess.join("")) || guess.length <  5)
-    {
-      setShake(true);
+  function shakeIt() {
+    setShake(true);
+    setTimeout(() => {
+      setShake(false);
+    }, 500);
+  }
+
+  function toastIt(error) {
+      setShowToast(true);
       setTimeout(() => {
-        setShake(false);
-      }, 500);
+        setShowToast(false);
+      }, 2000);
+      setToastText(error);
+      shakeIt();
+    }
+
+  const checkGuess = (guess) => {
+    // alert("checkGuess ", guess.join("").length < 5);
+    if (guess.join("").length < 5) {
+      toastIt("Not enough letters");
+      return;
+    }
+    if (!words.includes(guess.join("")) ) {
+      toastIt("Not in word list");
       return;
     }
     if (row === MAX_ATTEMPTS) return;
