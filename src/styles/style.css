@@ -6,6 +6,7 @@
     --unselected-border-size: 2px;
     --green: #548d4e;
     --yellow: #b49f3b;
+    --shake-power: 5px;
 }
 
 * {
@@ -85,4 +86,55 @@ header h1 {
         'Trebuchet MS',
         sans-serif;
     ;
+}
+
+.shake {
+    animation: shake 0.5s ease ;
+}
+
+@keyframes shake {
+    0% {
+        transform: translateX(0);
+    }
+
+    10% {
+        transform: translateX(var(--shake-power));
+    }
+
+    20% {
+        transform: translateX(calc(var(--shake-power) * -1));
+    }
+
+    30% {
+        transform: translateX(var(--shake-power));
+    }
+
+    40% {
+        transform: translateX(calc(var(--shake-power) * -1));
+    }
+
+    50% {
+        transform: translateX(var(--shake-power));
+    }
+
+    60% {
+        transform: translateX(calc(var(--shake-power) * -1));
+    }
+
+    70% {
+        transform: translateX(var(--shake-power));
+    }
+
+    80% {
+        transform: translateX(calc(var(--shake-power) * -1));
+    }
+
+    90% {
+        transform: translateX(var(--shake-power));
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+
 }

@@ -18,7 +18,13 @@ function Guess() {
 
   const checkGuess = (guess) => {
     if (!words.includes(guess.join("")) || guess.length <  5)
+    {
       setShake(true);
+      setTimeout(() => {
+        setShake(false);
+      }, 500);
+      return;
+    }
     if (row === MAX_ATTEMPTS) return;
     setGuess(guess);
     setGrid((prev) => {
@@ -64,7 +70,7 @@ function Guess() {
   return (
     <div className="guess">
       <h1>Guess</h1>
-      <div className="row">
+      <div className={`row ${shake ? "shake" : ""}`}>
         {guess.map((letter, i) => (
           <div className="col" key={i}>
             {letter}
