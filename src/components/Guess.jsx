@@ -1,6 +1,9 @@
 import React from "react";
 import { useState, useEffect, useContext } from "react";
 import { GameContext } from "../gameContext";
+import { MAX_ATTEMPTS, words } from "../settings";
+
+let randomWord = words[Math.floor(Math.random() * words.length)];
 
 function isValidLetter(letter) {
   const letters = "abcdefghijklmnopqrstuvwxyz";
@@ -8,9 +11,27 @@ function isValidLetter(letter) {
 }
 
 function Guess() {
-  const {  row, setRow, setGrid } = useContext(GameContext);
+  const { row, setRow, setGrid } = useContext(GameContext);
   const [index, setIndex] = useState(0);
-  const [guess, setGuess] = useState(["","","","",""]); 
+  const [guess, setGuess] = useState(["", "", "", "", ""]);
+  const [shake, setShake] = useState(false);
+
+  const checkGuess = (guess) => {
+    if (!words.includes(guess.join("")) || guess.length <  5)
+      setShake(true);
+    if (row === MAX_ATTEMPTS) return;
+    setGuess(guess);
+    setGrid((prev) => {
+      const copy = prev.map((row) => [...row]);
+      copy[row] = guess;
+      return copy;
+    });
+    let newGuess = guess.join("");
+    alert(newGuess);
+    setRow((prev) => prev + 1);
+    setGuess(["", "", "", "", ""]);
+    setIndex(0);
+  };
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -22,16 +43,8 @@ function Guess() {
         });
         setIndex(index - 1);
       }
-      if (e.key === "Enter" && index === 5) {
-        setGuess(guess);
-        setGrid((prev) => {
-          const copy = prev.map((row) => [...row]);
-          copy[row] = guess;
-          return copy;
-        });
-        setRow((prev) => prev + 1);
-        setGuess(["", "", "", "", ""]);
-        setIndex(0);
+      if (e.key === "Enter") {
+        checkGuess(guess);
       }
       if (!isValidLetter(e.key)) return;
       if (index > 4) return;
