@@ -7,9 +7,10 @@ function isValidLetter(letter) {
   return letters.includes(letter);
 }
 
-function Guess(props) {
-  const [guess, setGuess] = useState(["", "", "", "", ""]);
+function Guess() {
+  const {  row, setRow, setGrid } = useContext(GameContext);
   const [index, setIndex] = useState(0);
+  const [guess, setGuess] = useState(["","","","",""]); 
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -22,11 +23,15 @@ function Guess(props) {
         setIndex(index - 1);
       }
       if (e.key === "Enter" && index === 5) {
-        props.setGuess(guess);
-        props.setRow(prev => prev + 1);
+        setGuess(guess);
+        setGrid((prev) => {
+          const copy = prev.map((row) => [...row]);
+          copy[row] = guess;
+          return copy;
+        });
+        setRow((prev) => prev + 1);
         setGuess(["", "", "", "", ""]);
         setIndex(0);
-        props.setCheck(true);
       }
       if (!isValidLetter(e.key)) return;
       if (index > 4) return;

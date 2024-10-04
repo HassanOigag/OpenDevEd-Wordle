@@ -1,31 +1,26 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import { useState } from "react";
-function Grid(props) {
-  const [grid, setGrid] = useState([
-    ["", "", "", "", ""],
-    ["", "", "", "", ""],
-    ["", "", "", "", ""],
-    ["", "", "", "", ""],
-    ["", "", "", "", ""],
-    ["", "", "", "", ""],
-  ]);
+import { GameContext } from "../gameContext";
 
-  if (props.check) {
-    setGrid((prev) => {
-      const copy = prev.map((row) => [...row]);
-      grid[props.row] = props.guess;
-      props.setCheck(false);
-      return copy;
-    });
-  }
-  // useEffect(() => {
-  //   setGrid((prev) => {
-  //     const copy = prev.map((row) => [...row]);
-  //     copy[props.row] = props.guess;
-  //     return copy;
-  //   });
+function Grid() {
+  const {guess, row, submitted, setSubmitted, grid, setGrid} = useContext(GameContext);
 
-  // }, [props.row, props.guess]);
+    // if (submitted) {
+    //   setGrid((prev) => {
+    //     const copy = prev.map((row) => [...row]);
+    //     grid[row] = guess;
+    //     setSubmitted(false);
+    //     return copy;
+    //   });
+    // }
+    // useEffect(() => {
+    //   setGrid((prev) => {
+    //     const copy = prev.map((row) => [...row]);
+    //     copy[row] = guess;
+    //     return copy;
+    //   });
+
+    // }, [row, guess]);
 
   return (
     <>
