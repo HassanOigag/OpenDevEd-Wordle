@@ -16,6 +16,7 @@ function Guess() {
   const [index, setIndex] = useState(0);
   const [guess, setGuess] = useState(["", "", "", "", ""]);
   const [shake, setShake] = useState(false);
+  const [selected, setSelected] = useState(false);
 
   function shakeIt() {
     setShake(true);
@@ -25,21 +26,26 @@ function Guess() {
   }
 
   function toastIt(error) {
-      setShowToast(true);
-      setTimeout(() => {
-        setShowToast(false);
-      }, 2000);
-      setToastText(error);
-      shakeIt();
-    }
-
+    setShowToast(true);
+    setTimeout(() => {
+      setShowToast(false);
+    }, 2000);
+    setToastText(error);
+    shakeIt();
+  }
+  const removeBorder = () => {
+    let cols = document.querySelectorAll(".guess-letter");
+    cols.forEach((col) => {
+      col.classList.remove("border");
+    });
+  };
   const checkGuess = (guess) => {
     // alert("checkGuess ", guess.join("").length < 5);
     if (guess.join("").length < 5) {
       toastIt("Not enough letters");
       return;
     }
-    if (!words.includes(guess.join("")) ) {
+    if (!words.includes(guess.join(""))) {
       toastIt("Not in word list");
       return;
     }
@@ -51,15 +57,27 @@ function Guess() {
       return copy;
     });
     let newGuess = guess.join("");
-    alert(newGuess);
+    removeBorder();
+
     setRow((prev) => prev + 1);
     setGuess(["", "", "", "", ""]);
     setIndex(0);
   };
 
   useEffect(() => {
+    let cols = document.querySelectorAll(".guess-letter");
+    if (selected) {
+      console.log(cols[index]);
+      cols[index - 1].classList.add("selected");
+      cols[index - 1].classList.add("border");
+      setTimeout(() => {
+        cols[index - 1].classList.remove("selected");
+      }, 500);
+    }
+
     const handleKeyDown = (e) => {
       if (e.key === "Backspace" && index > 0) {
+        cols[index - 1].classList.remove("border");
         setGuess((prev) => {
           const copy = [...prev];
           copy[index - 1] = "";
@@ -71,12 +89,17 @@ function Guess() {
         checkGuess(guess);
       }
       if (!isValidLetter(e.key)) return;
+      setSelected(true);
+      setTimeout(() => {
+        setSelected(false);
+      }, 500);
       if (index > 4) return;
       setGuess((prev) => {
         const copy = [...prev];
         copy[index] = e.key;
         return copy;
       });
+
       setIndex(index + 1);
     };
     window.addEventListener("keydown", handleKeyDown);
@@ -90,7 +113,7 @@ function Guess() {
       <h1>Guess</h1>
       <div className={`row ${shake ? "shake" : ""}`}>
         {guess.map((letter, i) => (
-          <div className="col" key={i}>
+          <div className="col guess-letter" key={i}>
             {letter}
           </div>
         ))}

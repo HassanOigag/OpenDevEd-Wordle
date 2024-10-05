@@ -16,7 +16,7 @@
 }
 
 #root {
-    height: 100vh;  
+    height: 100vh;
 }
 
 body {
@@ -90,10 +90,10 @@ header h1 {
 }
 
 .shake {
-    animation: shake 0.5s ease ;
+    animation: shake 0.5s ease;
 }
 
-.toast-container{
+.toast-container {
     position: absolute;
     top: 0;
     right: 1rem;
@@ -108,6 +108,26 @@ header h1 {
     font-weight: bold;
     transform: translateY(120px);
     /* margin-top: 1rem; */
+}
+
+.selected{
+    animation: grow 0.1s;
+
+}
+.border {
+    border: 2px solid rgb(120, 122, 123);
+}
+
+@keyframes grow {
+    0%{
+        transform: scale(1);
+    }
+    50%{
+        transform: scale(1.1);
+    }
+    100%{
+        transform: scale(1);
+    }
 }
 
 @keyframes shake {
