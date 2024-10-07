@@ -6,7 +6,20 @@
     --unselected-border-size: 2px;
     --green: #548d4e;
     --yellow: #b49f3b;
+    --grey: #3A3A3D;
     --shake-power: 5px;
+}
+
+.correct {
+    background-color: var(--green);
+}
+
+.wrong {
+    background-color: var(--grey);
+}
+
+.misplaced {
+    background-color: var(--yellow);
 }
 
 * {

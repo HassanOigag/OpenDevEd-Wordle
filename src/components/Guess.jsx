@@ -4,7 +4,7 @@ import { GameContext } from "../gameContext";
 import { MAX_ATTEMPTS, words } from "../settings";
 
 let randomWord = words[Math.floor(Math.random() * words.length)];
-
+alert(randomWord);
 function isValidLetter(letter) {
   const letters = "abcdefghijklmnopqrstuvwxyz";
   return letters.includes(letter);
@@ -39,6 +39,7 @@ function Guess() {
       col.classList.remove("border");
     });
   };
+
   const checkGuess = (guess) => {
     // alert("checkGuess ", guess.join("").length < 5);
     if (guess.join("").length < 5) {
@@ -56,21 +57,23 @@ function Guess() {
       copy[row] = guess;
       return copy;
     });
-    let newGuess = guess.join("");
     removeBorder();
-
+    
     setRow((prev) => prev + 1);
     setGuess(["", "", "", "", ""]);
     setIndex(0);
+    let newGuess = guess.join("");
+    if (newGuess === randomWord) {
+      console.log("You win");
+    }
   };
 
   useEffect(() => {
     let cols = document.querySelectorAll(".guess-letter");
-    if (selected) {
-      console.log(cols[index]);
+    if (selected && index - 1> 0) {
       cols[index - 1].classList.add("selected");
       cols[index - 1].classList.add("border");
-      setTimeout(() => {
+      setTimeout(() =>  {
         cols[index - 1].classList.remove("selected");
       }, 500);
     }
