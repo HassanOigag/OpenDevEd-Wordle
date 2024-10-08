@@ -5,6 +5,11 @@ import { useState } from "react";
 import { GameContext } from "./gameContext";
 import { MAX_ATTEMPTS, WORD_LENGTH } from "./settings";
 import Toast from "./components/Toast";
+import {words} from "./settings";
+import Confetti from "react-confetti";
+let randomWord = words[Math.floor(Math.random() * words.length)];
+console.log(randomWord);
+
 function App() {
   const [grid, setGrid] = useState(
     Array.from({ length: MAX_ATTEMPTS }, () =>
@@ -15,6 +20,9 @@ function App() {
   const [submitted, setSubmitted] = useState(false);
   const [showToast, setShowToast] = useState(false);
   const [toastText, setToastText] = useState("");
+  const [won, setWon] = useState(false);
+  const [width, setWidth] = useState(window.innerWidth);
+  const [height, setHeight] = useState(window.innerHeight);
   return (
     <>
       <header>
@@ -31,8 +39,11 @@ function App() {
           setGrid,
           setShowToast,
           setToastText,
+          correctWord: randomWord,
+          setWon,
         }}
       >
+          {won && <h1>hello world</h1>}
           <Toast text={toastText} show={showToast} />
           <Grid />
           <Guess />

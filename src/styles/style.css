@@ -11,14 +11,17 @@
 }
 
 .correct {
+    border-color:   var(--green) !important; 
     background-color: var(--green);
 }
 
 .wrong {
-    background-color: var(--grey);
+    background-color: var(--grey) !important;
+    border-color: var(--grey);
 }
 
 .misplaced {
+    border-color: var(--yellow) !important;
     background-color: var(--yellow);
 }
 

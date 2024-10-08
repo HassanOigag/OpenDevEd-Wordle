@@ -3,15 +3,14 @@ import { useState, useEffect, useContext } from "react";
 import { GameContext } from "../gameContext";
 import { MAX_ATTEMPTS, words } from "../settings";
 
-let randomWord = words[Math.floor(Math.random() * words.length)];
-alert(randomWord);
+
 function isValidLetter(letter) {
   const letters = "abcdefghijklmnopqrstuvwxyz";
   return letters.includes(letter);
 }
 
 function Guess() {
-  const { row, setRow, setGrid, setShowToast, setToastText } =
+  const { row, setRow, setGrid, setShowToast, setToastText, randomWord, setWon } =
     useContext(GameContext);
   const [index, setIndex] = useState(0);
   const [guess, setGuess] = useState(["", "", "", "", ""]);
@@ -65,12 +64,13 @@ function Guess() {
     let newGuess = guess.join("");
     if (newGuess === randomWord) {
       console.log("You win");
+      setWon(true);
     }
   };
 
   useEffect(() => {
     let cols = document.querySelectorAll(".guess-letter");
-    if (selected && index - 1> 0) {
+    if (selected && index > 0) {
       cols[index - 1].classList.add("selected");
       cols[index - 1].classList.add("border");
       setTimeout(() =>  {

@@ -3,19 +3,22 @@ import { useState } from "react";
 import { GameContext } from "../gameContext";
 
 function Grid() {
-  const {row, grid} = useContext(GameContext);
+  const {row, grid, correctWord} = useContext(GameContext);
   const submittedRow = grid[row - 1 < 0 ? 0 : row - 1];
   const guess = submittedRow.join("");
 
   const getColor = (letter, index, word) => {
-    console.log(letter, index, guess);
-    if (guess[index] === letter)
+
+    if (word[index] === letter)
       return 'correct';
-    else if (guess.includes(letter)) {
+    else if (letter && word.includes(letter)) {
       return "misplaced";
     }
-    else
+    else if (!word.includes(letter)) {
       return "wrong";
+    }
+    else 
+      return
   };
   return (
     <>
@@ -23,7 +26,7 @@ function Grid() {
         {grid.map((row, i) => (
           <div className="row" key={i}>
             {row.map((cell, j) => (
-              <div className={`col ${guess[j] ? getColor(cell, j) : ''}`} key={j}>
+              <div className={`col ${guess[j] ? getColor(cell, j, correctWord) : ''}`} key={j}>
                 {cell}
               </div>
             ))}
