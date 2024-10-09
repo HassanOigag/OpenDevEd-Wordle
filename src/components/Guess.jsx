@@ -10,7 +10,7 @@ function isValidLetter(letter) {
 }
 
 function Guess() {
-  const { row, setRow, setGrid, setShowToast, setToastText, correctWord, setWon } =
+  const { row, setRow, setGrid, setShowToast, setToastText, correctWord, setWon, won } =
     useContext(GameContext);
   const [index, setIndex] = useState(0);
   const [guess, setGuess] = useState(["", "", "", "", ""]);
@@ -64,7 +64,6 @@ function Guess() {
     let newGuess = guess.join("");
     console.log(newGuess, correctWord)
     if (newGuess === correctWord) {
-      console.log("You win");
       setWon(true);
     }
   };
@@ -80,6 +79,13 @@ function Guess() {
     }
 
     const handleKeyDown = (e) => {
+      if (won || row >= MAX_ATTEMPTS)
+      {
+        setWon(false);
+        console.log(won, row, MAX_ATTEMPTS);
+        alert("Game Over");
+        return;
+      }
       if (e.key === "Backspace" && index > 0) {
         cols[index - 1].classList.remove("border");
         setGuess((prev) => {
