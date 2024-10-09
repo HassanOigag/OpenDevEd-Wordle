@@ -1,7 +1,7 @@
 import "./styles/style.css";
 import Grid from "./components/Grid";
 import Guess from "./components/Guess";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { GameContext } from "./gameContext";
 import { MAX_ATTEMPTS, WORD_LENGTH } from "./settings";
 import Toast from "./components/Toast";
@@ -16,6 +16,8 @@ function App() {
       Array.from({ length: WORD_LENGTH }, () => "")
     )
   );
+
+
   const [row, setRow] = useState(0);
   const [submitted, setSubmitted] = useState(false);
   const [showToast, setShowToast] = useState(false);
@@ -23,6 +25,8 @@ function App() {
   const [won, setWon] = useState(false);
   const [width, setWidth] = useState(window.innerWidth);
   const [height, setHeight] = useState(window.innerHeight);
+
+
   return (
     <>
       <header>
@@ -43,7 +47,7 @@ function App() {
           setWon,
         }}
       >
-          {won && <h1>hello world</h1>}
+          {won && <Confetti width={width} height={height}/>}
           <Toast text={toastText} show={showToast} />
           <Grid />
           <Guess />

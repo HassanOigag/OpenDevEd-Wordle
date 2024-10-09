@@ -10,7 +10,7 @@ function isValidLetter(letter) {
 }
 
 function Guess() {
-  const { row, setRow, setGrid, setShowToast, setToastText, randomWord, setWon } =
+  const { row, setRow, setGrid, setShowToast, setToastText, correctWord, setWon } =
     useContext(GameContext);
   const [index, setIndex] = useState(0);
   const [guess, setGuess] = useState(["", "", "", "", ""]);
@@ -62,7 +62,8 @@ function Guess() {
     setGuess(["", "", "", "", ""]);
     setIndex(0);
     let newGuess = guess.join("");
-    if (newGuess === randomWord) {
+    console.log(newGuess, correctWord)
+    if (newGuess === correctWord) {
       console.log("You win");
       setWon(true);
     }
